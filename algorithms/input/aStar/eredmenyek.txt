@@ -1,0 +1,19 @@
+surface_100x100.txt
+
+Shortest path length (by distance) = 188.7917002090514
+Shortest path length (by steps) = 99
+
+surface_100x100_test1.txt
+
+Shortest path length (by distance) = 243.30310798907254
+Shortest path length (by steps) = 136
+
+surface_100x100_test2.txt
+
+Shortest path length (by distance) = 200.48613782616314
+Shortest path length (by steps) = 100
+
+surface_256x256.txt
+
+Shortest path length (by distance) = 233.75930951719025
+Shortest path length (by steps) = 151
