@@ -8,5 +8,7 @@ void setup() {
 }
 
 void loop() {
-    runDFS(); // Call the DFS function from Pathfinding.h
+    runDFS();
+    //runBFS();
+    //runDijkstra();
 }
