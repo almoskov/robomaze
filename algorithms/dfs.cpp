@@ -39,7 +39,7 @@ void dfsback(int k, int **a, int n, bool *q, int *tomb, int &sz)
     }
 }
 
-int *DFS(int **szm, int n, int m)
+int *dfs(int **szm, int n, int m)
 {
     int *lista = new int[n];
     bool *q = new bool[n]{0};
