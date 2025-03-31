@@ -1,16 +1,8 @@
-/* This is only a demo application which uses
-* simple graph traversal to solve an easy maze
-* and control a robot equipped with a light sensor
-* to be able to navigate following a line made by black tape.
-*/
-
 #define LEFT_MOTOR_FORWARD  5
 #define LEFT_MOTOR_BACKWARD 6
 #define RIGHT_MOTOR_FORWARD 9
 #define RIGHT_MOTOR_BACKWARD 10
-#define LIGHT_SENSOR_LEFT A0
-#define LIGHT_SENSOR_RIGHT A1
-#define LIGHT_SENSOR_FRONT A2
+#define LIGHT_SENSOR_FLOOR A0
 
 struct Node {
     int x, y;
@@ -48,8 +40,8 @@ void turnRight() {
     delay(300);
 }
 
-bool isPath(int sensor) {
-    return analogRead(sensor) > 500;
+bool isPath() {
+    return analogRead(LIGHT_SENSOR_FLOOR) < 500; // Assuming black tape gives low value
 }
 
 void setup() {
@@ -57,9 +49,7 @@ void setup() {
     pinMode(LEFT_MOTOR_BACKWARD, OUTPUT);
     pinMode(RIGHT_MOTOR_FORWARD, OUTPUT);
     pinMode(RIGHT_MOTOR_BACKWARD, OUTPUT);
-    pinMode(LIGHT_SENSOR_LEFT, INPUT);
-    pinMode(LIGHT_SENSOR_RIGHT, INPUT);
-    pinMode(LIGHT_SENSOR_FRONT, INPUT);
+    pinMode(LIGHT_SENSOR_FLOOR, INPUT);
     Serial.begin(9600);
 }
 
@@ -72,18 +62,15 @@ void loop() {
         Node* current = pop();
         if (!current) continue;
 
-        if (isPath(LIGHT_SENSOR_FRONT)) {
+        if (isPath()) {
             moveForward();
             push(new Node{current->x, current->y + 1, current});
-        } else if (isPath(LIGHT_SENSOR_LEFT)) {
+        } else {
             turnLeft();
-            moveForward();
-            push(new Node{current->x - 1, current->y, current});
-        } else if (isPath(LIGHT_SENSOR_RIGHT)) {
-            turnRight();
-            moveForward();
-            push(new Node{current->x + 1, current->y, current});
+            if (!isPath()) {
+                turnRight();
+                turnRight();
+            }
         }
     }
 }
-
