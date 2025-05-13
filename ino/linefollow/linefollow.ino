@@ -10,8 +10,8 @@
 
 #include <AFMotor.h>
 
-#define left A0
-#define right A1
+#define left A5
+#define right A4
 
 AF_DCMotor motor1(1, MOTOR12_1KHZ); 
 AF_DCMotor motor2(2, MOTOR12_1KHZ);
