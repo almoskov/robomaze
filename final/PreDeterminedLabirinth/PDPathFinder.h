@@ -1,16 +1,27 @@
-#ifndef PATHFINDER_H
-#define PATHFINDER_H
+#ifndef PDPATHFINDER_H
+#define PDPATHFINDER_H
 
 #define ROWS 10
 #define COLS 10
-#define MAX_PATH 100
 
+/* this is for the "easy grid" example
+#define ROWS 4
+#define COLS 3
+*/
+
+/* this is for the "medium grid" example
+#define ROWS 8
+#define COLS 5
+*/
+
+#define MAX_PATH 100
 #include <stdio.h>
 #include <iostream>
 using namespace std;
+
 const int FORWARD = 1;
-const int LEFT = 2;
-const int RIGHT = 3;
+const int RIGHT = 2;
+const int LEFT = 3;
 
 class PathFinderPredetermined
 {
@@ -42,7 +53,7 @@ private:
     {
         int x, y, dir, cost;
     };
-
+    // hardcoded "hard grid"
     int grid[ROWS][COLS] = {
         {2, 1, 1, 1, 0, 0, 1, 1, 1, 0},
         {1, 0, 0, 1, 0, 0, 1, 0, 1, 1},
@@ -54,7 +65,24 @@ private:
         {0, 0, 1, 0, 1, 0, 0, 1, 1, 1},
         {1, 0, 1, 0, 0, 0, 0, 1, 0, 1},
         {1, 1, 1, 0, 3, 1, 1, 1, 0, 1}};
-
+    /* this is the "medium grid"
+    int grid[ROWS][COLS] = {
+        {2, 1, 1, 1, 0},
+        {1, 0, 0, 0, 0},
+        {1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 1},
+        {1, 1, 0, 0, 1},
+        {1, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1},
+        {1, 1, 1, 0, 3}};
+    */
+    /* this is the "easy grid"
+    int grid[ROWS][COLS] = {
+        {2, 0, 3},
+        {1, 1, 1},
+        {1, 0, 0},
+        {1, 0, 0}};
+    */
     Node path[MAX_PATH];
     int pathLength = 0;
 
@@ -122,9 +150,9 @@ private:
         if (diff == 0)
             return FORWARD;
         if (diff == 1)
-            return RIGHT;
-        if (diff == 3)
             return LEFT;
+        if (diff == 3)
+            return RIGHT;
         return -1;
     }
 
