@@ -1,28 +1,19 @@
-#ifndef PDPATHFINDER_H
-#define PDPATHFINDER_H
-
-#define ROWS 10
-#define COLS 10
-
-/* this is for the "easy grid" example
-#define ROWS 4
-#define COLS 3
-*/
-
-/* this is for the "medium grid" example
-#define ROWS 8
-#define COLS 5
-*/
-
-#define MAX_PATH 100
-// #include <stdio.h>
-// #include <iostream>
-//  using namespace std;
-
+/*
+ *   Navigation logic for a pathfinder that uses a predetermined path.
+ *
+ *   hardcoded elements :
+ *   MAX_PATH - maximum number of moves in the path
+ *   ROWS - number of rows in the grid
+ *   COLS - number of columns in the grid
+ *   grid - the grid itself, where:
+ *       0 - wall
+ *       1 - navigable space
+ *       2 - start point
+ *       3 - end point
+ */
 const int FORWARD = 1;
 const int RIGHT = 2;
 const int LEFT = 3;
-
 class PathFinderPredetermined
 {
 public:
@@ -53,36 +44,8 @@ private:
     {
         int x, y, dir, cost;
     };
-    // hardcoded "hard grid"
-    int grid[ROWS][COLS] = {
-        {2, 1, 1, 1, 0, 0, 1, 1, 1, 0},
-        {1, 0, 0, 1, 0, 0, 1, 0, 1, 1},
-        {1, 1, 0, 1, 1, 0, 1, 0, 0, 1},
-        {0, 1, 0, 0, 1, 1, 1, 1, 1, 0},
-        {0, 1, 1, 0, 0, 1, 0, 1, 0, 1},
-        {0, 1, 0, 0, 0, 1, 0, 1, 1, 1},
-        {0, 1, 1, 0, 1, 1, 0, 1, 0, 0},
-        {0, 0, 1, 0, 1, 0, 0, 1, 1, 1},
-        {1, 0, 1, 0, 0, 0, 0, 1, 0, 1},
-        {1, 1, 1, 0, 3, 1, 1, 1, 0, 1}};
-    /* this is the "medium grid"
-    int grid[ROWS][COLS] = {
-        {2, 1, 1, 1, 0},
-        {1, 0, 0, 0, 0},
-        {1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 1},
-        {1, 1, 0, 0, 1},
-        {1, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1},
-        {1, 1, 1, 0, 3}};
-    */
-    /* this is the "easy grid"
-    int grid[ROWS][COLS] = {
-        {2, 0, 3},
-        {1, 1, 1},
-        {1, 0, 0},
-        {1, 0, 0}};
-    */
+    // hardcoded "grid"
+    // int grid[ROWS][COLS] ;
     Node path[MAX_PATH];
     int pathLength = 0;
 
@@ -173,12 +136,3 @@ private:
         }
     }
 };
-
-/*int main()
-{
-    PathFinderPredetermined pathFinder;
-    pathFinder.solve();
-    return 0;
-}*/
-
-#endif // PATHFINDER_H
