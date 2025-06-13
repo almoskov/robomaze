@@ -6,6 +6,11 @@
 #define THRESHOLD 700
 #define INTERSECTION_THRESHOLD 4
 
+// this constant may be used for the speed of the motors
+// the value is subject to change based on the power to weight ration of the robot
+// and other physical enviromental factors
+// #define SPEED_VALUE 160
+
 QTRSensorsRC qtr((unsigned char[]) {2, 3, 4, 5, 6, 7, 8, 9}, NUM_SENSORS, TIMEOUT, A0);
 unsigned int sensorValues[NUM_SENSORS];
 

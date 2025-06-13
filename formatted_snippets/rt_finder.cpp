@@ -2,7 +2,7 @@
     Navigation logic for a pathfinder that tries to navigate
     real time in a maze.
 
-    The used variables, and macros are:
+    The used variables and macros are:
     - sensorValues - array of sensor values from the QTR sensors
     - qtr - QTR object for reading the sensors
     - THRESHOLD - threshold value for detecting the line
@@ -15,7 +15,6 @@
         - turnLeft() - turns left
         - turnRight() - turns right
         - uTurn() - performs a U-turn
-
 */
 
 bool isIntersection()
@@ -72,8 +71,8 @@ void loop()
         followLine();
     }
     /* This part is optional since the end detection cannot be efficiently done
-      // without a specific end marker, which would hinder the performace of either
-      // the line following capabilty or the predetermined path finding.
+      // without a specific end marker, which would hinder the performance of either
+      // the line following capability or the predetermined path finding.
     bool allDark = true;
     for (int i = 1; i <= 6; i++) {
       if (sensorValues[i] > THRESHOLD) {

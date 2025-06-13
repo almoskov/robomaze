@@ -1,5 +1,5 @@
 /*
-* Matrix represintation of the easiest labirinth
+* Matrix representation of the easiest labirinth
 */
 
 #define ROWS 4

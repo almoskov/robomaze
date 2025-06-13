@@ -1,6 +1,5 @@
 /*
-* Matrix represintation of the medium 
-* difficulty labirinth
+* Matrix representation of the medium difficulty labirinth
 */
 
 #define ROWS 8

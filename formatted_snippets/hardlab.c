@@ -1,5 +1,5 @@
 /*
-* Matrix represintation of the hardest labirinth
+* Matrix representation of the hardest labirinth
 */
 
 #define ROWS 10

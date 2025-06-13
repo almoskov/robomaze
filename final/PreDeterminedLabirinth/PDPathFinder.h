@@ -174,7 +174,7 @@ private:
     }
 };
 
-/*int main()
+/*int main() // this code snippet is only for debbuging purposes
 {
     PathFinderPredetermined pathFinder;
     pathFinder.solve();
