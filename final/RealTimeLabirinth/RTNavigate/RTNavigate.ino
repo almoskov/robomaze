@@ -1,9 +1,9 @@
 #include <QTRSensors.h>
 #include <AFMotor.h>
 
-#define NUM_SENSORS 8
+#define NUM_SENSORS 6
 #define TIMEOUT 2500
-#define THRESHOLD 700
+#define THRESHOLD 1010
 #define INTERSECTION_THRESHOLD 4
 
 // this constant may be used for the speed of the motors
@@ -11,7 +11,7 @@
 // and other physical enviromental factors
 // #define SPEED_VALUE 160
 
-QTRSensorsRC qtr((unsigned char[]) {2, 3, 4, 5, 6, 7, 8, 9}, NUM_SENSORS, TIMEOUT, A0);
+QTRSensors qtr;
 unsigned int sensorValues[NUM_SENSORS];
 
 AF_DCMotor leftMotor1(1);
@@ -19,7 +19,7 @@ AF_DCMotor leftMotor2(2);
 AF_DCMotor rightMotor1(3);
 AF_DCMotor rightMotor2(4);
 
-const int baseSpeed = 160;
+const int baseSpeed = 80;
 int lastError = 0;
 
 void setMotors(int leftSpeed, int rightSpeed) {
@@ -65,7 +65,7 @@ void uTurn() {
 }
 
 void followLine() {
-  int pos = qtr.readLine(sensorValues);
+  int pos = qtr.readLineBlack(sensorValues);
   int error = pos - 3500;
   int diff = error / 4;
   setMotors(baseSpeed + diff, baseSpeed - diff);
@@ -107,7 +107,9 @@ void handleIntersection() {
 
 void setup() {
   Serial.begin(9600);
-
+  qtr.setTypeAnalog();
+  qtr.setSensorPins((const uint8_t[]){A0, A1, A2, A3, A4, A5}, NUM_SENSORS);
+  qtr.setEmitterPin(2);
   leftMotor1.setSpeed(0); leftMotor2.setSpeed(0);
   rightMotor1.setSpeed(0); rightMotor2.setSpeed(0);
 
@@ -119,10 +121,16 @@ void setup() {
 
 void loop() {
   qtr.read(sensorValues);
-
+  for(int i=0;i<6;i++){
+    Serial.print(sensorValues[i]);
+    Serial.print(" ");
+  }
+  Serial.println();
   if (isIntersection()) {
+    Serial.println("INTERSECTION");
     handleIntersection();
   } else {
+    Serial.println("STRAIGHT");
     followLine();
   }
   /* This part is optional since the end detection cannot be efficiently done

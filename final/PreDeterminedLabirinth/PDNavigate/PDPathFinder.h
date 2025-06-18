@@ -19,9 +19,9 @@
 // #include <iostream>
 //  using namespace std;
 
-const int FORWARD = 1;
-const int RIGHT = 2;
-const int LEFT = 3;
+const int PF_FORWARD = 1;
+const int PF_RIGHT = 2;
+const int PF_LEFT = 3;
 
 class PathFinderPredetermined
 {
@@ -148,11 +148,11 @@ private:
     {
         int diff = (currDir - prevDir + 4) % 4;
         if (diff == 0)
-            return FORWARD;
+            return PF_FORWARD;
         if (diff == 1)
-            return LEFT;
+            return PF_LEFT;
         if (diff == 3)
-            return RIGHT;
+            return PF_RIGHT;
         return -1;
     }
 

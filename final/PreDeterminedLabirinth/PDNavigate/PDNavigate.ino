@@ -2,7 +2,7 @@
 #include "PDPathFinder.h"
 #include <QTRSensors.h>
 
-#define NUM_SENSORS 8
+#define NUM_SENSORS 6
 #define TIMEOUT 2500
 #define THRESHOLD 700
 #define INTERSECTION_THRESHOLD 4
@@ -12,8 +12,9 @@
 // and other physical enviromental factors
 // #define SPEED_VALUE 160
 
-QTRSensorsRC qtr((unsigned char[]){2, 3, 4, 5, 6, 7, 8, 9}, NUM_SENSORS, TIMEOUT, A0);
-PathFinder pf;
+QTRSensors qtr;
+
+PathFinderPredetermined pf;
 
 short *directions;
 int directionIndex = 0;
@@ -85,7 +86,7 @@ bool isIntersection(unsigned int *sensorValues)
 void followLine()
 {
   unsigned int sensorValues[NUM_SENSORS];
-  int position = qtr.readLine(sensorValues);
+  int position = qtr.readLineBlack(sensorValues);
   int error = position - 3500;
 
   int motorSpeed = error / 4;
@@ -95,13 +96,17 @@ void followLine()
 void setup()
 {
   Serial.begin(9600);
+  qtr.setTypeAnalog();
+  qtr.setSensorPins((const uint8_t[]){A0, A1, A2, A3, A4, A5}, NUM_SENSORS);
+  qtr.setEmitterPin(2);
+  
   directions = pf.solve();
 
   // Calibrate QTR sensors
   for (int i = 0; i < 250; i++)
   {
     qtr.calibrate();
-    delay(20);
+    delay(5);
   }
 }
 
